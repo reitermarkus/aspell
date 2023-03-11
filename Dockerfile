@@ -1,13 +1,12 @@
-FROM alpine:3.15
+FROM ruby:3.2.1-slim-bullseye
 
-RUN apk add --no-cache \
-      aspell           \
-      aspell-de        \
-      aspell-en        \
-      aspell-fr        \
-      aspell-uk        \
-      aspell-lang      \
-      ruby
+RUN apt -y update &&                \
+    apt -y install aspell           \
+                   aspell-de        \
+                   aspell-en        \
+                   aspell-fr        \
+                   aspell-uk        \
+                   aspell-pl        
 
 COPY entry.rb /
 
