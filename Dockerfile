@@ -10,7 +10,7 @@ RUN apt-get update && \
             aspell \
             aspell-en \
             aspell-is \
-            ruby
+            ruby3.0
 
 COPY entry.rb /
 
