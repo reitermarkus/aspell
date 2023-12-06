@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby3.0
+#!/usr/bin/env ruby
 
 Warning[:deprecated] = false
 
@@ -121,15 +121,15 @@ files.each do |file|
     errors.each do |e|
       e => {word:, line:, column:, suggestions:}
       message = <<~EOF
-        Wrong spelling of “#{word}” found (line #{line}, column #{column}). Maybe you meant one of the following?
+        Possible wrong spelling of “#{word}” found (line #{line}, column #{column}). Maybe you meant one of the following?
 
         #{suggestions.join(', ')}
       EOF
 
-      puts "::error file=#{escape(file)},line=#{line},col=#{column}::#{escape(message)}"
+      puts "::warning file=#{escape(file)},line=#{line},col=#{column}::#{escape(message)}"
     end
 
-    exit_status = 1
+    exit_status = 0
   end
 rescue => e
   puts "::error file=#{escape(file)}::#{e}"
