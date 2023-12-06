@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby3.0
 
 Warning[:deprecated] = false
 
@@ -48,14 +48,14 @@ def check_file(file, args)
 
         loop do
           output = stdout.readline
-
+          
           next if output.start_with?('@(#)')
           break if output == "\n"
 
           output = StringScanner.new(output)
 
-          if type = output.scan(/(&|#|\*)/)
-            if type == '*'
+          if type = output.scan(/(&|#|\*|-)/)
+            if type == '*' or type == '-'
               output.skip(/\n/)
               next
             end
@@ -87,7 +87,7 @@ def check_file(file, args)
               suggestions: suggestions,
             }
           end
-
+          
           assert_rest(output.rest)
         end
       end
@@ -117,7 +117,9 @@ files.each do |file|
   if errors.empty?
     puts "No errors found."
   else
-    errors.each do |word:, line:, column:, suggestions:|
+    puts errors
+    errors.each do |e|
+      e => {word:, line:, column:, suggestions:}
       message = <<~EOF
         Wrong spelling of “#{word}” found (line #{line}, column #{column}). Maybe you meant one of the following?
 
