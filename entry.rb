@@ -10,6 +10,7 @@ files = ARGV[0].shellsplit.flat_map { |path| Dir.glob(path) }
 args = ARGV[1].shellsplit
 
 if files.empty?
+  puts "::warning ::No files provided for spellcheck"
   exit 0
 end
 
