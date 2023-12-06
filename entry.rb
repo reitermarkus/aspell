@@ -9,7 +9,9 @@ require 'strscan'
 files = ARGV[0].shellsplit.flat_map { |path| Dir.glob(path) }
 args = ARGV[1].shellsplit
 
-raise "No files files specified." if files.empty?
+if files.empty?
+  exit 0
+end
 
 def escape(s)
   s.gsub(/\r/, '%0D')
