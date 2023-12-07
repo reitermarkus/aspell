@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby3.0
 
 Warning[:deprecated] = false
 
@@ -6,9 +6,11 @@ require 'open3'
 require 'shellwords'
 require 'strscan'
 
+
 files = ARGV[0].shellsplit.flat_map { |path| Dir.glob(path) }
 args = ARGV[1].shellsplit
 
+puts ARGV
 if files.empty?
   puts "::warning ::No files provided for spellcheck"
   exit 0
