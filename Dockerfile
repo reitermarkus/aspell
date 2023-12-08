@@ -6,9 +6,9 @@ RUN apk add --no-cache \
       aspell-de~=20161207 \
       aspell-en~=2020.12.07 \
       aspell-fr~=0.50 \
-      aspell-ru~=00.99f7-r0 \
+      aspell-ru~=0.99f7-r2 \
       aspell-uk~=1.4.0 \
-      ruby~=3.0.3
+      ruby~=3.2.2
 
 COPY entry.rb /
 
