@@ -9,6 +9,10 @@ inputs:
     description: 'Files which to run `aspell` on. Supports glob patterns.'
     required: false
     default: '**/*.tex'
+  extra_words_files:
+    description: 'Files with one word per line. Each word will be added temporarily to the dictionary before the run'
+    required: false
+    default: ''
   args:
     description: 'Arguments passed to `aspell`.'
     required: false
@@ -18,4 +22,5 @@ runs:
   image: 'Dockerfile'
   args:
     - '${{ inputs.files }}'
+    - '${{ inputs.extra_words_files }}'
     - '${{ inputs.args }}'

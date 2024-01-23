@@ -8,7 +8,8 @@ require 'strscan'
 
 
 files = ARGV[0].shellsplit.flat_map { |path| Dir.glob(path) }
-args = ARGV[1].shellsplit
+extra_words_files = ARGV[1].shellsplit.flat_map { |path| Dir.glob(path) }
+args = ARGV[2].shellsplit
 
 puts ARGV
 if files.empty?
@@ -27,9 +28,16 @@ def assert_rest(rest)
   raise "Failed to parse rest of output: #{rest}" unless rest.empty?
 end
 
-def check_file(file, args)
+def check_file(file, extra_words_files, args)
   Open3.popen3('aspell', 'pipe', *args) do |stdin, stdout, stderr, wait_thread|
     errors = []
+
+    extra_words_files.each do |extra_words_file|
+      File.open(extra_words_file).each_line.with_index do |line, i|
+        stdin.print '*'
+        stdin.puts line.chomp
+      end
+    end
 
     begin
       extension = File.extname(file)
@@ -117,7 +125,7 @@ exit_status = 0
 files.each do |file|
   puts "Checking spelling in file '#{file}':"
 
-  errors = check_file(file, args)
+  errors = check_file(file, extra_words_files, args)
 
   if errors.empty?
     puts "No errors found."
