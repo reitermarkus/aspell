@@ -33,6 +33,7 @@ def check_file(file, extra_words_files, args)
     errors = []
 
     extra_words_files.each do |extra_words_file|
+      puts "Adding words from file '#{extra_words_file}':"
       File.open(extra_words_file).each_line.with_index do |line, i|
         stdin.print '*'
         stdin.puts line.chomp
