@@ -131,6 +131,7 @@ files.each do |file|
   if errors.empty?
     puts "No errors found."
   else
+    exit_status = 1
     puts errors
     errors.each do |e|
       e => {word:, line:, column:, suggestions:}
@@ -139,11 +140,9 @@ files.each do |file|
 
         #{suggestions.join(', ')}
       EOF
-
-      puts "::warning file=#{escape(file)},line=#{line},col=#{column}::#{escape(message)}"
+      puts "::error file=#{escape(file)},line=#{line},col=#{column}::#{escape(message)}"
     end
 
-    exit_status = 0
   end
 rescue => e
   puts "::error file=#{escape(file)}::#{e}"
