@@ -18,4 +18,4 @@ jobs:
           files: '**/*.md'
           args: '--lang=en_GB --mode=markdown'
   build-push:
-    uses: reitermarkus/.github/.github/workflows/docker-build-push.yml@b86c845549771597a7e73d32eec67c54a6760f30 # main
+    uses: reitermarkus/.github/.github/workflows/docker-build-push.yml@fa6c8942a566660dd93e0af4f6cd50a96dbc33d6 # main
